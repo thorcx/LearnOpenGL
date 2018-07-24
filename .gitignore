@@ -40,6 +40,8 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
+
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
@@ -328,3 +330,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Un ignore GLFW lib
+!*.lib
