@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -130,7 +130,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -143,11 +143,16 @@
   <ItemGroup>
     <ClCompile Include="Source\Common.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\ogl\math_3d.cpp" />
+    <ClCompile Include="Source\ogl\ogldev_util.cpp" />
     <ClCompile Include="ThirdParty\GLAD\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\CommonTypes.h" />
+    <ClInclude Include="Source\ogl\ogldev_math_3d.h" />
+    <ClInclude Include="Source\ogl\ogldev_types.h" />
+    <ClInclude Include="Source\ogl\ogldev_util.h" />
     <ClInclude Include="Source\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,15 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{2abd6faf-4496-404d-b23a-e59ceaf168b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ogl">
+      <UniqueIdentifier>{3d49a2c2-7d38-4b92-a0fa-d8f53f58fd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ogl\Public">
+      <UniqueIdentifier>{3c017208-b757-4edd-b7d7-3f38c60f5dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ogl\Private">
+      <UniqueIdentifier>{0a634ca3-539d-407c-a153-e7673317882e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\GLAD\src\glad.c">
@@ -27,6 +36,12 @@
     <ClCompile Include="Source\Common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ogl\math_3d.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ogl\ogldev_util.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ShaderManager.h">
@@ -37,6 +52,15 @@
     </ClInclude>
     <ClInclude Include="Source\CommonTypes.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_math_3d.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_util.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_types.h">
+      <Filter>Header Files\ogl\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

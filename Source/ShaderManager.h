@@ -71,6 +71,8 @@ static void CompileShaders(GLuint shaderProgram, std::string vsFileName, std::st
 		std::cout << "Invalide shader program: " << ErrorLog << std::endl;
 		exit(1);
 	}
+	
+	
 	//当shaderAttach并且Link成功后，就可以释放对应的ShaderObject
 	//注意这里先要Detach,再Delete,如果直接Delete,OpenGL只是将ShaderObject的索引-1，并不能回收资源
 	glDetachShader(shaderProgram, vsobj);
