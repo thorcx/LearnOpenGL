@@ -1,6 +1,9 @@
+
+
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
+
+#include "ShaderManager.h"
 
 //定义一个标准坐标系三角形
 float vertices[] = {
@@ -16,19 +19,7 @@ unsigned int indices[] = {
 	1,2,3
 };
 
-const char *vertexShaderSource = "#version 330 core\n"
-	"layout (location = 0) in vec3 aPos;\n"
-	"void main()\n"
-	"{\n"
-	"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-	"}\0";
 
-const char *fragmentShaderSource = "#version 330 core\n"
-	"out vec4 FragColor;\n"
-	"void main()\n"
-	"{\n"
-	"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-	"}\n\0";
 
 
 //窗口大小改变后的回调函数
@@ -78,48 +69,12 @@ int main()
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	//创建ShaderObject;
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	//指定此ShaderOject对应的GLSL文件内容
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	//编译此shader
-	glCompileShader(vertexShader);
-	//检查编译错误
-	int success;
-	char infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	//FS编译
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
+
+
 
 	//创建ShaderProgram,代表VS,FS的集合
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	//检查错误
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-	}
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
-
-
+	GLint shaderProgram = glCreateProgram();
+	CompileShaders(shaderProgram, "Source/Shaders/BaseVS.glsl", "Source/Shaders/BaseFS.glsl");
 	
 	unsigned int VAO,VBO,EBO;
 
@@ -165,14 +120,21 @@ int main()
 		processInput(window);
 		
 		//Render指令
-		glClearColor(0.8f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
 		//这里又使用vao绑定，所有前面的vbo的状态被恢复到记录他的时刻
+		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		//线框模式
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue) / 2.0f + 0.5f;
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "uniColor");
+		//int scale = glGetUniformLocation(shaderProgram, "gScale");
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 1.0f, 1.0f);
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 

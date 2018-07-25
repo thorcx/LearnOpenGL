@@ -101,10 +101,12 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,17 +130,29 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Common.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="ThirdParty\GLAD\src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\CommonTypes.h" />
+    <ClInclude Include="Source\ShaderManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\shaders\BaseFS.glsl" />
+    <None Include="Source\shaders\BaseVS.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
