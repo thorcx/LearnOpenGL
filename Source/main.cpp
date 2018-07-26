@@ -21,6 +21,8 @@ unsigned int indices[] = {
 	1,2,3
 };
 
+PersProjInfo gPersProjInfo;
+
 
 
 
@@ -115,6 +117,13 @@ int main()
 	//GPU对应的VAO的状态
 	glBindVertexArray(0);
 
+	//设置透视参数
+	gPersProjInfo.FOV = 30.0f;
+	gPersProjInfo.Height = 600;
+	gPersProjInfo.Width = 800;
+	gPersProjInfo.zNear = 1.0f;
+	gPersProjInfo.zFar = 100.0f;
+
 	//这里创建大循环
 	while (!glfwWindowShouldClose(window))
 	{
@@ -136,15 +145,17 @@ int main()
 		int vertexColorLocation = glGetUniformLocation(shaderProgram, "uniColor");
 		
 		static float Scale = 0.0f;
-		Scale += 0.001f;
+		Scale += 0.1f;
 		Pipeline p;
-		p.Scale(sinf(Scale * 0.1f), sinf(Scale * 0.1f), sinf(Scale * 0.1f));
-		p.WorldPos(sinf(Scale), 0.0f, 0.0f);
-		p.Rotate(sinf(Scale) * 90.0f, sinf(Scale) * 90.0f, sinf(Scale) * 90.0f);
+		p.Rotate(0.0f, Scale, 0.0f);
+		p.WorldPos(0.0f, 0.0f, 5.0f);
+		p.SetPerspectiveProj(gPersProjInfo);
+		
+		//p.Rotate(sinf(Scale) * 90.0f, sinf(Scale) * 90.0f, sinf(Scale) * 90.0f);
 
 		GLuint gWorldLocation = glGetUniformLocation(shaderProgram, "gWorld");
 
-		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWorldTrans());
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWPTrans());
 		//int scale = glGetUniformLocation(shaderProgram, "gScale");
 		glUniform4f(vertexColorLocation, 0.0f, greenValue, 1.0f, 1.0f);
 
