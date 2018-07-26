@@ -21,6 +21,7 @@ unsigned int indices[] = {
 	1,2,3
 };
 
+Camera* pCamera = NULL;
 PersProjInfo gPersProjInfo;
 
 
@@ -117,8 +118,13 @@ int main()
 	//GPU对应的VAO的状态
 	glBindVertexArray(0);
 
+	Vector3f CameraPos(0.0f, -3.0f, -3.0f);
+	Vector3f CameraTarget(0.0f, 0.0f, 2.0f);
+	Vector3f CameraUp(0.0f, 1.0f, 0.0f);
+	pCamera = new Camera(800, 600, CameraPos, CameraTarget, CameraUp);
+
 	//设置透视参数
-	gPersProjInfo.FOV = 30.0f;
+	gPersProjInfo.FOV = 60.0f;
 	gPersProjInfo.Height = 600;
 	gPersProjInfo.Width = 800;
 	gPersProjInfo.zNear = 1.0f;
@@ -148,14 +154,16 @@ int main()
 		Scale += 0.1f;
 		Pipeline p;
 		p.Rotate(0.0f, Scale, 0.0f);
-		p.WorldPos(0.0f, 0.0f, 5.0f);
+		p.WorldPos(0.0f, 0.0f, 3.0f);
+		
+		p.SetCamera(*pCamera);
 		p.SetPerspectiveProj(gPersProjInfo);
 		
 		//p.Rotate(sinf(Scale) * 90.0f, sinf(Scale) * 90.0f, sinf(Scale) * 90.0f);
 
-		GLuint gWorldLocation = glGetUniformLocation(shaderProgram, "gWorld");
+		GLuint gWorldLocation = glGetUniformLocation(shaderProgram, "gWVP");
 
-		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWPTrans());
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWVPTrans());
 		//int scale = glGetUniformLocation(shaderProgram, "gScale");
 		glUniform4f(vertexColorLocation, 0.0f, greenValue, 1.0f, 1.0f);
 
