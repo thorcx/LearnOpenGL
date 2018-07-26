@@ -42,6 +42,21 @@
     <ClCompile Include="Source\ogl\ogldev_util.cpp">
       <Filter>Header Files\ogl\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ogl\pipeline.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ogl\camera.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ogl\ogldev_atb.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ogl\ogldev_basic_lighting.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ogl\technique.cpp">
+      <Filter>Header Files\ogl\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ShaderManager.h">
@@ -60,6 +75,24 @@
       <Filter>Header Files\ogl\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\ogl\ogldev_types.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_pipeline.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_camera.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_keys.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_atb.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\ogldev_basic_lighting.h">
+      <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ogl\technique.h">
       <Filter>Header Files\ogl\Public</Filter>
     </ClInclude>
   </ItemGroup>

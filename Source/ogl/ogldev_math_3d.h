@@ -24,6 +24,7 @@
 #define _USE_MATH_DEFINES 
 #include <cmath>
 #else
+#define _USE_MATH_DEFINES 
 #include <math.h>
 #endif
 

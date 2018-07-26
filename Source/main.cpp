@@ -5,6 +5,7 @@
 
 #include "ShaderManager.h"
 #include "ogl/ogldev_math_3d.h"
+#include "ogl/ogldev_pipeline.h"
 
 //定义一个标准坐标系三角形
 float vertices[] = {
@@ -136,15 +137,14 @@ int main()
 		
 		static float Scale = 0.0f;
 		Scale += 0.001f;
-		Matrix4f World;
-		World.m[0][0] = 1.0f; World.m[0][1] = 0.0f; World.m[0][2] = 0.0f; World.m[0][3] = sinf(Scale);
-		World.m[1][0] = 0.0f; World.m[1][1] = 1.0f; World.m[1][2] = 0.0f; World.m[1][3] = 0.0f;
-		World.m[2][0] = 0.0f; World.m[2][1] = 0.0f; World.m[2][2] = 1.0f; World.m[2][3] = 0.0f;
-		World.m[3][0] = 0.0f; World.m[3][1] = 0.0f; World.m[3][2] = 0.0f; World.m[3][3] = 1.0f;
-		
+		Pipeline p;
+		p.Scale(sinf(Scale * 0.1f), sinf(Scale * 0.1f), sinf(Scale * 0.1f));
+		p.WorldPos(sinf(Scale), 0.0f, 0.0f);
+		p.Rotate(sinf(Scale) * 90.0f, sinf(Scale) * 90.0f, sinf(Scale) * 90.0f);
+
 		GLuint gWorldLocation = glGetUniformLocation(shaderProgram, "gWorld");
 
-		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &World.m[0][0]);
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWorldTrans());
 		//int scale = glGetUniformLocation(shaderProgram, "gScale");
 		glUniform4f(vertexColorLocation, 0.0f, greenValue, 1.0f, 1.0f);
 

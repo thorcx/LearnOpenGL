@@ -33,11 +33,11 @@
 
 using namespace std;
 
-//bool ReadFile(const char* fileName, string& outFile);
-//char* ReadBinaryFile(const char* pFileName, int& size);
+bool ReadFile(const char* fileName, string& outFile);
+char* ReadBinaryFile(const char* pFileName, int& size);
 
-//void OgldevError(const char* pFileName, uint line, const char* msg, ... );
-//void OgldevFileError(const char* pFileName, uint line, const char* pFileError);
+void OgldevError(const char* pFileName, uint line, const char* msg, ... );
+void OgldevFileError(const char* pFileName, uint line, const char* pFileError);
 
 #define OGLDEV_ERROR0(msg) OgldevError(__FILE__, __LINE__, msg)
 #define OGLDEV_ERROR(msg, ...) OgldevError(__FILE__, __LINE__, msg, __VA_ARGS__)
