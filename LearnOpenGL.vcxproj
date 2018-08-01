@@ -101,13 +101,13 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\stb;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng15.lib;zlib.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\ATB\lib;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\lib\x64;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\lib\x64;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\ATB\lib;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,18 +131,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\stb;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng15.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common.cpp" />
+    <ClCompile Include="Source\CxTexture.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\ogl\camera.cpp" />
     <ClCompile Include="Source\ogl\math_3d.cpp" />
@@ -151,11 +152,13 @@
     <ClCompile Include="Source\ogl\ogldev_util.cpp" />
     <ClCompile Include="Source\ogl\pipeline.cpp" />
     <ClCompile Include="Source\ogl\technique.cpp" />
+    <ClCompile Include="Source\PngLoader.cpp" />
     <ClCompile Include="ThirdParty\GLAD\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\CommonTypes.h" />
+    <ClInclude Include="Source\CxTexture.h" />
     <ClInclude Include="Source\ogl\ogldev_atb.h" />
     <ClInclude Include="Source\ogl\ogldev_basic_lighting.h" />
     <ClInclude Include="Source\ogl\ogldev_camera.h" />
@@ -165,6 +168,7 @@
     <ClInclude Include="Source\ogl\ogldev_types.h" />
     <ClInclude Include="Source\ogl\ogldev_util.h" />
     <ClInclude Include="Source\ogl\technique.h" />
+    <ClInclude Include="Source\PngLoader.h" />
     <ClInclude Include="Source\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>

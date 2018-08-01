@@ -25,15 +25,15 @@
     <Filter Include="Header Files\ogl\Private">
       <UniqueIdentifier>{0a634ca3-539d-407c-a153-e7673317882e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Public">
+      <UniqueIdentifier>{68a5a4c4-204f-4082-ad59-96bc76e7433d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Private">
+      <UniqueIdentifier>{d80563a9-0fc5-4c42-99e6-f97c3c366520}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ThirdParty\GLAD\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\ogl\math_3d.cpp">
@@ -57,17 +57,20 @@
     <ClCompile Include="Source\ogl\technique.cpp">
       <Filter>Header Files\ogl\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdParty\GLAD\src\glad.c">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PngLoader.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CxTexture.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\ShaderManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CommonTypes.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ogl\ogldev_math_3d.h">
       <Filter>Header Files\ogl\Public</Filter>
     </ClInclude>
@@ -94,6 +97,21 @@
     </ClInclude>
     <ClInclude Include="Source\ogl\technique.h">
       <Filter>Header Files\ogl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CommonTypes.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShaderManager.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PngLoader.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CxTexture.h">
+      <Filter>Source Files\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

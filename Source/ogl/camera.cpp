@@ -88,9 +88,68 @@ void Camera::Init()
     m_mousePos.x  = m_windowWidth / 2;
     m_mousePos.y  = m_windowHeight / 2;
 
+	
    // glutWarpPointer(m_mousePos.x, m_mousePos.y);
 }
 
+bool Camera::OnKeyboardEvent(int key)
+{
+	bool Ret = false;
+
+	switch (key) {
+
+	case 265:
+	case 87://GLFW_KEY_W
+	{
+		m_pos += (m_target * STEP_SCALE);
+		Ret = true;
+	}
+	break;
+
+	case 264:
+	case 83://GLFW_KEY_S
+	{
+		m_pos -= (m_target * STEP_SCALE);
+		Ret = true;
+	}
+	break;
+
+	case 263:
+	case 65://GLFW_KEY_A
+	{
+		Vector3f Left = m_target.Cross(m_up);
+		Left.Normalize();
+		Left *= STEP_SCALE;
+		m_pos += Left;
+		Ret = true;
+	}
+	break;
+
+	case 262:
+	case 68://GLFW_KEY_D
+	{
+		Vector3f Right = m_up.Cross(m_target);
+		Right.Normalize();
+		Right *= STEP_SCALE;
+		m_pos += Right;
+		Ret = true;
+	}
+	break;
+
+	case 81://GLFW_KEY_Q
+		m_pos.y += STEP_SCALE;
+		break;
+
+	case 69://GLFW_KEY_E
+		m_pos.y -= STEP_SCALE;
+		break;
+
+	default:
+		break;
+	}
+
+	return Ret;
+}
 
 bool Camera::OnKeyboard(OGLDEV_KEY Key)
 {

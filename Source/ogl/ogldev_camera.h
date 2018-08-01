@@ -31,6 +31,9 @@ public:
 
     Camera(int WindowWidth, int WindowHeight, const Vector3f& Pos, const Vector3f& Target, const Vector3f& Up);
 
+	//接入GLFW的key响应
+	bool OnKeyboardEvent(int key);
+
     bool OnKeyboard(OGLDEV_KEY Key);
 
     void OnMouse(int x, int y);

@@ -80,4 +80,6 @@ static void CompileShaders(GLuint shaderProgram, std::string vsFileName, std::st
 	glDetachShader(shaderProgram, fsobj);
 	glDeleteShader(fsobj);
 
+
+
 }
