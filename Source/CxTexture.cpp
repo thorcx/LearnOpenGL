@@ -1,5 +1,6 @@
 //为了使用stb_image.h这个单头文件库编译，先要定义这个宏
 #define STB_IMAGE_IMPLEMENTATION
+#include <glad/glad.h>
 #include <stb_image.h>
 #include "CxTexture.h"
 

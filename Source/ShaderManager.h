@@ -1,7 +1,7 @@
 #pragma once
 #include "Common.h"
 #include <iostream>
-
+#include <glad/glad.h>
 //读取Shader文件,Attach到ShaderProgram中
 static GLuint AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
 {
