@@ -72,6 +72,15 @@
     <ClCompile Include="Source\CxApp.cpp">
       <Filter>Source Files\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LightApp.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightingTechnique.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IAppCallback.cpp">
+      <Filter>Source Files\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ogl\ogldev_math_3d.h">
@@ -119,12 +128,27 @@
     <ClInclude Include="Source\CxApp.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\LightApp.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightingTechnique.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IAppCallback.h">
+      <Filter>Source Files\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\BaseVS.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Source\shaders\BaseFS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Source\shaders\LightingVS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Source\shaders\LightingFS.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

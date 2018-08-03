@@ -7,7 +7,7 @@
 #include "ogl/ogldev_math_3d.h"
 #include "ogl/ogldev_pipeline.h"
 #include "CxTexture.h"
-#include "CxApp.h"
+#include "LightApp.h"
 
 struct Vertex
 {
@@ -57,6 +57,8 @@ static void CreateIndexBuffer()
 
 Camera* pCamera = NULL;
 PersProjInfo gPersProjInfo;
+static ICallbacks* s_pCallbacks = nullptr;
+
 
 
 GLuint	gSampler;
@@ -66,7 +68,8 @@ GLuint	gSampler;
 //窗口大小改变后的回调函数
 void framebuffer_size_callback(GLFWwindow * window, int width, int height)
 {
-	glViewport(0, 0, width, height);
+	s_pCallbacks->FrameBufferSizeCB(window, width, height);
+	//glViewport(0, 0, width, height);
 }
 
 //输入回调
@@ -90,25 +93,21 @@ void MousePosCallback(GLFWwindow *window, double x, double y)
 }
 
 
-class FLightAPP :public CxApp
-{
-public:
-	static  void FrameBufferSizeCB(struct GLFWwindow *window, int width, int height);
-};
 
-void FLightAPP::FrameBufferSizeCB(struct GLFWwindow *window, int width, int height)
-{
-	cout << "aaa";
-}
+
+
 
 
 
 int main()
 {
 	FLightAPP app;
-	app.Init(800, 600);
+	app.Init(1024, 768);
+	s_pCallbacks = &app;
 
-	app.SetupGlewCallbacks(FLightAPP::FrameBufferSizeCB);
+	app.SetupGlewCallbacks(framebuffer_size_callback);
+
+	//app.SetupGlewCallbacks(FLightAPP::FrameBufferSizeCB);
 
 	app.Run();
 	return 0;

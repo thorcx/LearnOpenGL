@@ -145,6 +145,9 @@
     <ClCompile Include="Source\Common.cpp" />
     <ClCompile Include="Source\CxApp.cpp" />
     <ClCompile Include="Source\CxTexture.cpp" />
+    <ClCompile Include="Source\IAppCallback.cpp" />
+    <ClCompile Include="Source\LightApp.cpp" />
+    <ClCompile Include="Source\LightingTechnique.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\ogl\camera.cpp" />
     <ClCompile Include="Source\ogl\math_3d.cpp" />
@@ -161,6 +164,9 @@
     <ClInclude Include="Source\CommonTypes.h" />
     <ClInclude Include="Source\CxApp.h" />
     <ClInclude Include="Source\CxTexture.h" />
+    <ClInclude Include="Source\IAppCallback.h" />
+    <ClInclude Include="Source\LightApp.h" />
+    <ClInclude Include="Source\LightingTechnique.h" />
     <ClInclude Include="Source\ogl\ogldev_atb.h" />
     <ClInclude Include="Source\ogl\ogldev_basic_lighting.h" />
     <ClInclude Include="Source\ogl\ogldev_camera.h" />
@@ -176,6 +182,8 @@
   <ItemGroup>
     <None Include="Source\shaders\BaseFS.glsl" />
     <None Include="Source\shaders\BaseVS.glsl" />
+    <None Include="Source\shaders\LightingFS.glsl" />
+    <None Include="Source\shaders\LightingVS.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
