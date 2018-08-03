@@ -2,6 +2,8 @@
 //#include <GLFW/glfw3.h>
 
 typedef void(*GLFWframebuffersizeCB)(struct GLFWwindow*, int, int);
+typedef void(*GLFWKeyCB)(struct GLFWwindow*, int, int, int, int);
+typedef void(*GLFWCursorPosCB)(struct GLFWwindow*, double, double);
 
 class CxApp
 {
@@ -18,7 +20,7 @@ public:
 
 	virtual void Run();
 
-	virtual void SetupGlewCallbacks(GLFWframebuffersizeCB fn1);
+	virtual void SetupGlewCallbacks(GLFWframebuffersizeCB fn1, GLFWKeyCB fn2, GLFWCursorPosCB fn3);
 protected:
 	CxApp();
 
@@ -33,10 +35,10 @@ protected:
 	void RenderFPS();
 
 	float GetRunningTime();
-
+protected:
+	struct GLFWwindow  *m_pGLFWwindow;
 private:
 
-	struct GLFWwindow  *m_pGLFWwindow;
 
 	long long	m_FrameTime;
 	long long	m_StartTime;

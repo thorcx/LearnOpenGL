@@ -66,11 +66,11 @@ void CxApp::Run()
 	}
 }
 
-void CxApp::SetupGlewCallbacks(GLFWframebuffersizeCB fn1)
+void CxApp::SetupGlewCallbacks(GLFWframebuffersizeCB fn1, GLFWKeyCB fn2, GLFWCursorPosCB fn3)
 {
 	glfwSetFramebufferSizeCallback(m_pGLFWwindow, fn1);
-	glfwSetKeyCallback(m_pGLFWwindow, &(this->KeyboardCB));
-	glfwSetCursorPosCallback(m_pGLFWwindow, &(this->MousePosCB));
+	glfwSetKeyCallback(m_pGLFWwindow, fn2);
+	glfwSetCursorPosCallback(m_pGLFWwindow, fn3);
 }
 
 void CxApp::CalcFPS()

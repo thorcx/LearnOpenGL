@@ -84,12 +84,12 @@ void processInput(GLFWwindow *window)
 void KeyCallbackFunc(GLFWwindow *window, int keyCode, int keyScanCode, int keyAction, int comboFlags)
 {
 	//pCamera->OnKeyboard((OGLDEV_KEY)keyCode);
-	pCamera->OnKeyboardEvent(keyCode);
+	//pCamera->OnKeyboardEvent(keyCode);
 }
 
 void MousePosCallback(GLFWwindow *window, double x, double y)
 {
-	pCamera->OnMouse(x, y);
+	//pCamera->OnMouse(x, y);
 }
 
 
@@ -105,7 +105,7 @@ int main()
 	app.Init(1024, 768);
 	s_pCallbacks = &app;
 
-	app.SetupGlewCallbacks(framebuffer_size_callback);
+	app.SetupGlewCallbacks(framebuffer_size_callback, KeyCallbackFunc, MousePosCallback);
 
 	//app.SetupGlewCallbacks(FLightAPP::FrameBufferSizeCB);
 

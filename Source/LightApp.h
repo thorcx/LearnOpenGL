@@ -19,6 +19,7 @@ public:
 
 	virtual void Init(int WindowWidth, int WindowHeight);
 
+	virtual void Run();
 
 private:
 	void CreateVertexBuffer();
