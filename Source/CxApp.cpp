@@ -11,7 +11,7 @@ void CxApp::Init(int WindowWidth, int WindowHeight)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	//´´½¨´°¿Ú
+	//åˆ›å»ºçª—å£
 	m_pGLFWwindow = glfwCreateWindow(WindowWidth, WindowHeight, "LearnOpenGL", NULL, NULL);
 	if (m_pGLFWwindow == NULL)
 	{
@@ -20,11 +20,11 @@ void CxApp::Init(int WindowWidth, int WindowHeight)
 		return;
 	}
 
-	//ÉèÖÃÉÏÒ»²½´´½¨µÄ´°¿ÚÎªµ±Ç°Ïß³ÌÄÚµÄmain context
+	//è®¾ç½®ä¸Šä¸€æ­¥åˆ›å»ºçš„çª—å£ä¸ºå½“å‰çº¿ç¨‹å†…çš„main context
 	glfwMakeContextCurrent(m_pGLFWwindow);
 
-	//Ê¹ÓÃGLADÀ´¹ÜÀíOpenGLµÄº¯ÊıÖ¸Õë
-	//ÏêÏ¸½âÊÍ²Î¿¼https://learnopengl.com/Getting-started/Creating-a-window
+	//ä½¿ç”¨GLADæ¥ç®¡ç†OpenGLçš„å‡½æ•°æŒ‡é’ˆ
+	//è¯¦ç»†è§£é‡Šå‚è€ƒhttps://learnopengl.com/Getting-started/Creating-a-window
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
@@ -48,18 +48,18 @@ CxApp::~CxApp()
 
 void CxApp::Run()
 {
-	//ÕâÀï´´½¨´óÑ­»·
+	//è¿™é‡Œåˆ›å»ºå¤§å¾ªç¯
 	while (!glfwWindowShouldClose(m_pGLFWwindow))
 	{
 		if (glfwGetKey(m_pGLFWwindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
 			glfwSetWindowShouldClose(m_pGLFWwindow, true);
 		}
-		//RenderÖ¸Áî
+		//RenderæŒ‡ä»¤
 		glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//½»»»BackBuffer
+		//äº¤æ¢BackBuffer
 		glfwSwapBuffers(m_pGLFWwindow);
 		glfwPollEvents();
 

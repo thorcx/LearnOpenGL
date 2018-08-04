@@ -1,6 +1,6 @@
 #pragma once
 
-
+//这里定义接口是用来做静态函数转发
 class ICallbacks
 {
 public:

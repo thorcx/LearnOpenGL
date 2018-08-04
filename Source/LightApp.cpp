@@ -25,7 +25,7 @@ FLightAPP::FLightAPP()
 :m_pCamera(nullptr),m_pEffect(nullptr),m_pTexture(nullptr),
 m_Scale(0.0f)
 {
-	m_DirLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
+	m_DirLight.Color = Vector3f(1.0f, 0.0f, 0.0f);
 	m_DirLight.AmbientIntensity = 0.5f;
 
 	
@@ -48,7 +48,7 @@ void FLightAPP::KeyboardCB(struct GLFWwindow *window, int keyCode, int keyScanCo
 	m_pCamera->OnKeyboardEvent(keyCode);
 }
 
-void FLightAPP::MousePosCB(struct GLFWwindow *window, double x, double y)
+void FLightAPP::MouseCB(struct GLFWwindow *window, double x, double y)
 {
 	m_pCamera->OnMouse(x, y);
 }
@@ -56,6 +56,9 @@ void FLightAPP::MousePosCB(struct GLFWwindow *window, double x, double y)
 void FLightAPP::Init(int WindowWidth, int WindowHeight)
 {
 	CxApp::Init(WindowWidth, WindowHeight);
+
+
+
 	m_PersProjInfo.FOV = 60.0f;
 	m_PersProjInfo.Width = WindowWidth;
 	m_PersProjInfo.Height = WindowHeight;
@@ -63,6 +66,10 @@ void FLightAPP::Init(int WindowWidth, int WindowHeight)
 	m_PersProjInfo.zFar = 100.0f;
 
 	m_pCamera = new Camera(WindowWidth, WindowHeight);
+
+	PerpareMesh();
+//	CreateVertexBuffer();
+//	CreateIndexBuffer();
 
 	m_pEffect = new FLightingTechnique();
 	if (!m_pEffect->Init())
@@ -88,36 +95,50 @@ void FLightAPP::Run()
 			glfwSetWindowShouldClose(m_pGLFWwindow, true);
 		}
 		m_pCamera->OnRender();
-		//Renderָ��
-		glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+		
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		m_Scale += 0.1;
-
+		glFrontFace(GL_CW);
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+		m_Scale += 1;
+		
 		Pipeline p;
 		p.Rotate(0.0f, m_Scale, 0.0f);
-		p.WorldPos(0.0f, 0.0f, 0.0f);
+		p.WorldPos(0.0f, 0.0f, 10.0f);
 		p.SetCamera(m_pCamera->GetPos(), m_pCamera->GetTarget(), m_pCamera->GetUp());
 		p.SetPerspectiveProj(m_PersProjInfo);
 		m_pEffect->SetWVP(p.GetWVPTrans());
 		m_pEffect->SetDirectionalLight(m_DirLight);
 
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void*)(3 * sizeof(float)));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+		m_pEffect->Enable();
+
+		BindVAO();
 		m_pTexture->Bind(GL_TEXTURE0);
+		
 		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		//����BackBuffer
 		glfwSwapBuffers(m_pGLFWwindow);
 		glfwPollEvents();
 
 	}
 }
+
+void FLightAPP::BindVAO()
+{
+	glBindVertexArray(m_VAO);
+}
+
+void FLightAPP::PerpareMesh()
+{
+	glGenVertexArrays(1, &m_VAO);
+	glBindVertexArray(m_VAO);
+	CreateVertexBuffer();
+	CreateIndexBuffer();
+	glBindVertexArray(0);
+}
+
+
 
 void FLightAPP::CreateVertexBuffer()
 {
@@ -129,6 +150,12 @@ void FLightAPP::CreateVertexBuffer()
 	glGenBuffers(1, &m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	//绑定顶点位置
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	//绑定顶点纹理坐标
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)(3 * sizeof(float)));
 }
 
 void FLightAPP::CreateIndexBuffer()
@@ -137,6 +164,8 @@ void FLightAPP::CreateIndexBuffer()
 		1, 3, 2,
 		2, 3, 0,
 		1, 2, 0 };
+
+
 
 	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);

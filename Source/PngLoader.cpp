@@ -1,130 +1,130 @@
-#include "PngLoader.h"
-
-#include "pnginfo.h"
-
-using namespace std;
-#define PNG_BYTES_TO_CHECK 4
-FPngLoader::FPngLoader()
-{
-
-}
-
-bool FPngLoader::LoadFile(std::string FileName)
-{
-	FILE *fp = nullptr;
-	errno_t err;
-	err = fopen_s(&fp, FileName.c_str(), "rb");
-	if (!fp)
-	{
-		cout << "Cant open file" << FileName.c_str() << endl;
-		return false;
-	}
-	
-	if (!IsPNG(fp))
-	{
-		cout << "File" << FileName.c_str() <<"is not a valid png file"<< endl;
-		return false;
-	}
-
-	m_png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-	if (m_png_ptr == NULL)
-	{
-		cout << "Cant create png_ptr" << FileName.c_str() << endl;
-		fclose(fp);
-		return false;
-	}
-
-	m_info_ptr = png_create_info_struct(m_png_ptr);
-	if (m_info_ptr == NULL)
-	{
-		cout << "Cant create info_ptr" << FileName.c_str() << endl;
-		fclose(fp);
-		return false;
-	}
-
-	//ÉèÖÃÊ§°ÜÌø×ªµã£¬ÕâÀïÊÇ±ê×¼libpng cÊ½Ð´·¨£¬
-	//¿ÉÒÔ²Î¿¼ÒýÇæÐ´·¨ÔÚpng_create_read_structÉèÖÃ×Ô¼ºµÄ´íÎó´¦Àíº¯Êý£¬Èç¹ûÔÚÄÇÀïÉèÖÃÁË£¬ÕâÀï¾Í¿ÉÒÔ²»ÓÃsetjmpÁË
-	if (setjmp(png_jmpbuf(m_png_ptr)))
-	{
-		png_destroy_read_struct(&m_png_ptr,&m_info_ptr, NULL);
-		fclose(fp);
-		return false;
-	}
-
-	
-	ReadPNGToBuffer(fp);
-	
-	png_destroy_read_struct(&m_png_ptr, &m_info_ptr, 0);
-
-	fclose(fp);
-
-	return true;
-
-}
-
-//¸ù¾ÝlibpngÖÐµÄexample.c¸ø³öµÄÀý×Ó£¬¼ì²éÊÇ·ñÊÇºÏ·¨µÄpng¸ñÊ½ÎÄ¼þ
-bool FPngLoader::IsPNG(FILE *fp)
-{
-	char buf[PNG_BYTES_TO_CHECK];
-
-	//¶ÁÈ¡png±ê¼ÇÎ»
-	if (fread(buf, 1, PNG_BYTES_TO_CHECK, fp) != PNG_BYTES_TO_CHECK)
-		return false;
-
-	return (!png_sig_cmp(reinterpret_cast<png_const_bytep>(buf), (png_size_t)0, PNG_BYTES_TO_CHECK));
-
-}
-
-void FPngLoader::ReadPNGToBuffer(FILE *fp)
-{
-	rewind(fp);
-	//¶ÁÈ¡Á÷µÄ·½Ê½
-	png_init_io(m_png_ptr, fp);
-
-	//Ö±½ÓÕû¸ö¶ÁÈ¡Í¼Æ¬,PNG_TRANSFORM_EXPANDÓÐÈçÏÂ´¦Àí
-	//À©Õ¹Paletted ÑÕÉ«µ½true RGBÈýÔª×é
-	//À©Õ¹»Ò¶ÈÍ¼µ½full 8 bits ,´Ó1,2,4bits/pixel
-	//À©Õ¹Paletted»òÕßRGBÍ¼Æ¬ÓëalphaÍ¨µÀµ½RGBA¸ñÊ½
-	png_read_png(m_png_ptr, m_info_ptr, PNG_TRANSFORM_EXPAND, 0);
-
-	m_Width		= m_info_ptr->width;
-	m_Height	= m_info_ptr->height;
-	m_ColorType = m_info_ptr->color_type;
-	m_BitDepth = m_info_ptr->pixel_depth;
-	png_bytep *row_pointers = png_get_rows(m_png_ptr, m_info_ptr);
-	int pos = 0;
-
-	//¶ÔRGBAÍ¼µÄ´¦Àí
-	if (m_ColorType == PNG_COLOR_TYPE_RGBA)
-	{
-		m_RGBA = new unsigned char[m_Width * m_Height * 4];
-		memset(m_RGBA, 0, m_Width * m_Height * 4);
-		for (int i = 0; i < m_Height; i++)
-		{
-			for (int j = 0; j < m_Width * 4; j += 4)
-			{
-				m_RGBA[pos++] = row_pointers[i][j];//R
-				m_RGBA[pos++] = row_pointers[i][j + 1];//G
-				m_RGBA[pos++] = row_pointers[i][j + 2];//B
-				m_RGBA[pos++] = row_pointers[i][j + 3];//A
-			}
-		}
-	}
-
-	
-
-	//png_read_png()
-	//png_get_rowbytes(m_png_ptr, m_info_ptr);
-
-//	png_read_info(m_png_ptr, m_info_ptr);
-
-	//png_get_IHDR(m_png_ptr, m_info_ptr, &m_Width, &m_Height, &m_BitDepth, &m_ColorType, nullptr, nullptr);
-
-}
-
-unsigned char* FPngLoader::GetImageBuffer()
-{
-	return m_RGBA;
-}
-
-
+//#include "PngLoader.h"
+//
+//#include "pnginfo.h"
+//
+//using namespace std;
+//#define PNG_BYTES_TO_CHECK 4
+//FPngLoader::FPngLoader()
+//{
+//
+//}
+//
+//bool FPngLoader::LoadFile(std::string FileName)
+//{
+//	FILE *fp = nullptr;
+//	errno_t err;
+//	err = fopen_s(&fp, FileName.c_str(), "rb");
+//	if (!fp)
+//	{
+//		cout << "Cant open file" << FileName.c_str() << endl;
+//		return false;
+//	}
+//	
+//	if (!IsPNG(fp))
+//	{
+//		cout << "File" << FileName.c_str() <<"is not a valid png file"<< endl;
+//		return false;
+//	}
+//
+//	m_png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+//	if (m_png_ptr == NULL)
+//	{
+//		cout << "Cant create png_ptr" << FileName.c_str() << endl;
+//		fclose(fp);
+//		return false;
+//	}
+//
+//	m_info_ptr = png_create_info_struct(m_png_ptr);
+//	if (m_info_ptr == NULL)
+//	{
+//		cout << "Cant create info_ptr" << FileName.c_str() << endl;
+//		fclose(fp);
+//		return false;
+//	}
+//
+//	//ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½×ªï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½×¼libpng cÊ½Ð´ï¿½ï¿½ï¿½ï¿½
+//	//ï¿½ï¿½ï¿½Ô²Î¿ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½png_create_read_structï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½Ô²ï¿½ï¿½ï¿½setjmpï¿½ï¿½
+//	if (setjmp(png_jmpbuf(m_png_ptr)))
+//	{
+//		png_destroy_read_struct(&m_png_ptr,&m_info_ptr, NULL);
+//		fclose(fp);
+//		return false;
+//	}
+//
+//	
+//	ReadPNGToBuffer(fp);
+//	
+//	png_destroy_read_struct(&m_png_ptr, &m_info_ptr, 0);
+//
+//	fclose(fp);
+//
+//	return true;
+//
+//}
+//
+////ï¿½ï¿½ï¿½ï¿½libpngï¿½Ðµï¿½example.cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ÇºÏ·ï¿½ï¿½ï¿½pngï¿½ï¿½Ê½ï¿½Ä¼ï¿½
+//bool FPngLoader::IsPNG(FILE *fp)
+//{
+//	char buf[PNG_BYTES_TO_CHECK];
+//
+//	//ï¿½ï¿½È¡pngï¿½ï¿½ï¿½Î»
+//	if (fread(buf, 1, PNG_BYTES_TO_CHECK, fp) != PNG_BYTES_TO_CHECK)
+//		return false;
+//
+//	return (!png_sig_cmp(reinterpret_cast<png_const_bytep>(buf), (png_size_t)0, PNG_BYTES_TO_CHECK));
+//
+//}
+//
+//void FPngLoader::ReadPNGToBuffer(FILE *fp)
+//{
+//	rewind(fp);
+//	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ä·ï¿½Ê½
+//	png_init_io(m_png_ptr, fp);
+//
+//	//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Í¼Æ¬,PNG_TRANSFORM_EXPANDï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½
+//	//ï¿½ï¿½Õ¹Paletted ï¿½ï¿½É«ï¿½ï¿½true RGBï¿½ï¿½Ôªï¿½ï¿½
+//	//ï¿½ï¿½Õ¹ï¿½Ò¶ï¿½Í¼ï¿½ï¿½full 8 bits ,ï¿½ï¿½1,2,4bits/pixel
+//	//ï¿½ï¿½Õ¹Palettedï¿½ï¿½ï¿½ï¿½RGBÍ¼Æ¬ï¿½ï¿½alphaÍ¨ï¿½ï¿½ï¿½ï¿½RGBAï¿½ï¿½Ê½
+//	png_read_png(m_png_ptr, m_info_ptr, PNG_TRANSFORM_EXPAND, 0);
+//
+//	m_Width		= m_info_ptr->width;
+//	m_Height	= m_info_ptr->height;
+//	m_ColorType = m_info_ptr->color_type;
+//	m_BitDepth = m_info_ptr->pixel_depth;
+//	png_bytep *row_pointers = png_get_rows(m_png_ptr, m_info_ptr);
+//	int pos = 0;
+//
+//	//ï¿½ï¿½RGBAÍ¼ï¿½Ä´ï¿½ï¿½ï¿½
+//	if (m_ColorType == PNG_COLOR_TYPE_RGBA)
+//	{
+//		m_RGBA = new unsigned char[m_Width * m_Height * 4];
+//		memset(m_RGBA, 0, m_Width * m_Height * 4);
+//		for (int i = 0; i < m_Height; i++)
+//		{
+//			for (int j = 0; j < m_Width * 4; j += 4)
+//			{
+//				m_RGBA[pos++] = row_pointers[i][j];//R
+//				m_RGBA[pos++] = row_pointers[i][j + 1];//G
+//				m_RGBA[pos++] = row_pointers[i][j + 2];//B
+//				m_RGBA[pos++] = row_pointers[i][j + 3];//A
+//			}
+//		}
+//	}
+//
+//	
+//
+//	//png_read_png()
+//	//png_get_rowbytes(m_png_ptr, m_info_ptr);
+//
+////	png_read_info(m_png_ptr, m_info_ptr);
+//
+//	//png_get_IHDR(m_png_ptr, m_info_ptr, &m_Width, &m_Height, &m_BitDepth, &m_ColorType, nullptr, nullptr);
+//
+//}
+//
+//unsigned char* FPngLoader::GetImageBuffer()
+//{
+//	return m_RGBA;
+//}
+//
+//

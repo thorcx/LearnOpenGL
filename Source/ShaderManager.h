@@ -2,7 +2,7 @@
 #include "Common.h"
 #include <iostream>
 #include <glad/glad.h>
-//¶ÁÈ¡ShaderÎÄ¼ş,Attachµ½ShaderProgramÖĞ
+//è¯»å–Shaderæ–‡ä»¶,Attachåˆ°ShaderProgramä¸­
 static GLuint AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
 {
 	GLuint ShaderObj = glCreateShader(ShaderType);
@@ -50,7 +50,7 @@ static void CompileShaders(GLuint shaderProgram, std::string vsFileName, std::st
 	GLuint fsobj = AddShader(shaderProgram, ps.c_str(), GL_FRAGMENT_SHADER);
 
 	GLint Success = 0;
-	//ÏòShaderProgram Attach ¶ÔÓ¦µÄShaderºóĞèÒªLink
+	//å‘ShaderProgram Attach å¯¹åº”çš„Shaderåéœ€è¦Link
 	glLinkProgram(shaderProgram);
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &Success);
 	if (!Success)
@@ -61,7 +61,7 @@ static void CompileShaders(GLuint shaderProgram, std::string vsFileName, std::st
 		exit(1);
 	}
 	
-	//ÉÏÃæµÄlink»á½«vs,psµÄÊäÈëÊä³ö¼ì²éºóÁ¬½ÓÒ»Æğ²¢ÓÅ»¯£¬ÏÂÃæµÄValidate»á¸ù¾İµ±Ç°OpenGL context stateÀ´È·¶¨¸½¼ÓµÄshader¿ÉÓÃ
+	//ä¸Šé¢çš„linkä¼šå°†vs,psçš„è¾“å…¥è¾“å‡ºæ£€æŸ¥åè¿æ¥ä¸€èµ·å¹¶ä¼˜åŒ–ï¼Œä¸‹é¢çš„Validateä¼šæ ¹æ®å½“å‰OpenGL context stateæ¥ç¡®å®šé™„åŠ çš„shaderå¯ç”¨
 	glValidateProgram(shaderProgram);
 	glGetProgramiv(shaderProgram, GL_VALIDATE_STATUS, &Success);
 	if (!Success)
@@ -73,8 +73,8 @@ static void CompileShaders(GLuint shaderProgram, std::string vsFileName, std::st
 	}
 	
 	
-	//µ±shaderAttach²¢ÇÒLink³É¹¦ºó£¬¾Í¿ÉÒÔÊÍ·Å¶ÔÓ¦µÄShaderObject
-	//×¢ÒâÕâÀïÏÈÒªDetach,ÔÙDelete,Èç¹ûÖ±½ÓDelete,OpenGLÖ»ÊÇ½«ShaderObjectµÄË÷Òı-1£¬²¢²»ÄÜ»ØÊÕ×ÊÔ´
+	//å½“shaderAttachå¹¶ä¸”LinkæˆåŠŸåï¼Œå°±å¯ä»¥é‡Šæ”¾å¯¹åº”çš„ShaderObject
+	//æ³¨æ„è¿™é‡Œå…ˆè¦Detach,å†Delete,å¦‚æœç›´æ¥Delete,OpenGLåªæ˜¯å°†ShaderObjectçš„ç´¢å¼•-1ï¼Œå¹¶ä¸èƒ½å›æ”¶èµ„æº
 	glDetachShader(shaderProgram, vsobj);
 	glDeleteShader(vsobj);
 	glDetachShader(shaderProgram, fsobj);

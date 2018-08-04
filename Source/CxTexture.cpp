@@ -1,4 +1,4 @@
-//ÎªÁËÊ¹ÓÃstb_image.hÕâ¸öµ¥Í·ÎÄ¼ş¿â±àÒë£¬ÏÈÒª¶¨ÒåÕâ¸öºê
+//ä¸ºäº†ä½¿ç”¨stb_image.hè¿™ä¸ªå•å¤´æ–‡ä»¶åº“ç¼–è¯‘ï¼Œå…ˆè¦å®šä¹‰è¿™ä¸ªå®
 #define STB_IMAGE_IMPLEMENTATION
 #include <glad/glad.h>
 #include <stb_image.h>
@@ -20,9 +20,9 @@ bool FCXTexture::Load()
 
 	glGenTextures(1, &m_TextureObj);
 	glBindTexture(m_TextureTarget, m_TextureObj);
-	//TextureObject´æ´¢ÁËÊµ¼ÊµÄÍ¼Æ¬Êı¾İµ½OpenGLÖĞ
-	//TextureObject²»Ö±½Ó°ó¶¨µ½shaderÖĞ£¬¶øÊÇ°ó¶¨µ½Ò»¸ötexture unit,ÎÒÃÇ´«µİÕâ¸öunitµÄindexµ½shaderÖĞ
-	//shaderÍ¨¹ıÕâ¸öindexË÷Òıµ½¶ÔÓ¦µÄtextureObject,¾ßÌå¿ÉÊ¹ÓÃµÄtextureunitÊıÄ¿È¡¾öÓÚÏÔ¿¨ÄÜÁ¦
+	//TextureObjectå­˜å‚¨äº†å®é™…çš„å›¾ç‰‡æ•°æ®åˆ°OpenGLä¸­
+	//TextureObjectä¸ç›´æ¥ç»‘å®šåˆ°shaderä¸­ï¼Œè€Œæ˜¯ç»‘å®šåˆ°ä¸€ä¸ªtexture unit,æˆ‘ä»¬ä¼ é€’è¿™ä¸ªunitçš„indexåˆ°shaderä¸­
+	//shaderé€šè¿‡è¿™ä¸ªindexç´¢å¼•åˆ°å¯¹åº”çš„textureObject,å…·ä½“å¯ä½¿ç”¨çš„textureunitæ•°ç›®å–å†³äºæ˜¾å¡èƒ½åŠ›
 
 	glTexImage2D(m_TextureTarget, 0, GL_RGBA, width, height,
 		0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -35,13 +35,13 @@ bool FCXTexture::Load()
 
 void FCXTexture::Bind(GLenum TextureUnit)
 {
-	//°ó¶¨unitÓëtextureobjectµÚÒ»²½ÊÇ¼¤»î¶ÔÓ¦µÄunit
-	//¼¤»î¶ÔÓ¦µÄtexture unitµ¥Ôª
+	//ç»‘å®šunitä¸textureobjectç¬¬ä¸€æ­¥æ˜¯æ¿€æ´»å¯¹åº”çš„unit
+	//æ¿€æ´»å¯¹åº”çš„texture unitå•å…ƒ
 	glActiveTexture(TextureUnit);
 
-	//¼¤»îunitºóbind²Ù×÷¾Í»á½«¶ÔÓ¦µÄtextureobject°ó¶¨µ½µ±Ç°±»¼¤»îµÄtexture unitÖĞ
-	//Ã¿Ò»¸ötexture unit¿ÉÒÔÍ¬Ê±¶ÔÓ¦¶à¸ö²»Í¬ÀàĞÍµÄtextureobject. ÀàĞÍ±»³ÆÎªtexture target(1D,2D...)
-	//Äã¿ÉÒÔÍ¬Ê±½«textureobjectA°ó¶¨µ½unit0µÄ1DTarget,textureobjectB°ó¶¨µ½unit0µÄ2DTarget
+	//æ¿€æ´»unitåbindæ“ä½œå°±ä¼šå°†å¯¹åº”çš„textureobjectç»‘å®šåˆ°å½“å‰è¢«æ¿€æ´»çš„texture unitä¸­
+	//æ¯ä¸€ä¸ªtexture unitå¯ä»¥åŒæ—¶å¯¹åº”å¤šä¸ªä¸åŒç±»å‹çš„textureobject. ç±»å‹è¢«ç§°ä¸ºtexture target(1D,2D...)
+	//ä½ å¯ä»¥åŒæ—¶å°†textureobjectAç»‘å®šåˆ°unit0çš„1DTarget,textureobjectBç»‘å®šåˆ°unit0çš„2DTarget
 	glBindTexture(m_TextureTarget, m_TextureObj);
 }
 

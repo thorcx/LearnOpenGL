@@ -27,8 +27,8 @@ bool FLightingTechnique::Init()
 
 	m_WVPLocation			= GetUniformLocation("gWVP");
 	m_SamplerLocation		= GetUniformLocation("gSampler");
-	m_DirLightColorLocation = GetUniformLocation("gDirectionLight.Color");
-	m_DirLightAmbientIntensityLocation = GetUniformLocation("gDirectionLight.AmbientIntensity");
+	m_DirLightColorLocation = GetUniformLocation("gDirectionalLight.Color");
+	m_DirLightAmbientIntensityLocation = GetUniformLocation("gDirectionalLight.AmbientIntensity");
 
 	if (m_DirLightAmbientIntensityLocation == -1 || m_DirLightColorLocation == -1 ||
 		m_WVPLocation == -1 || m_SamplerLocation == -1)

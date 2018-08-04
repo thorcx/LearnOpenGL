@@ -31,6 +31,18 @@
     <Filter Include="Source Files\Private">
       <UniqueIdentifier>{d80563a9-0fc5-4c42-99e6-f97c3c366520}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Public\Effects">
+      <UniqueIdentifier>{66646165-988c-4ff1-a9c7-b8fa3569541c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Private\Effects">
+      <UniqueIdentifier>{0d7e7c18-d306-4801-8bd9-b95c773ec760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Public\App">
+      <UniqueIdentifier>{edc42b5a-f201-4af7-8ea1-547c89e040c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Private\App">
+      <UniqueIdentifier>{fed2d2af-48ba-4d71-833f-84bc6c013fde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -80,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="Source\IAppCallback.cpp">
       <Filter>Source Files\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Effects\BasicShadingEffect.cpp">
+      <Filter>Source Files\Private\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App\BasicAPP.cpp">
+      <Filter>Source Files\Private\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +155,12 @@
     <ClInclude Include="Source\IAppCallback.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Effects\BasicShadingEffect.h">
+      <Filter>Source Files\Public\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App\BasicAPP.h">
+      <Filter>Source Files\Public\App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\BaseVS.glsl">
@@ -149,6 +173,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Source\shaders\LightingFS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Source\shaders\DebugBaseVS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Source\shaders\DebugBaseFS.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

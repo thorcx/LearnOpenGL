@@ -1,41 +1,41 @@
-#pragma once
-
-#include <iostream>
-#include "png.h"
-
-//°ü×°libpng¿â£¬ÏÖÔÚ²»Ê¹ÓÃ£¬¸ÄÓÃstb_imageÕâ¸ö¿â 
-
-class FPngLoader
-{
-public:
-	FPngLoader();
-
-	bool LoadFile(std::string FileName);
-
-	//ÊÇ·ñÊÇºÏ·¨µÄpngÎÄ¼þ
-	bool IsPNG(FILE *fp);
-
-	void ReadPNGToBuffer(FILE *fp);
-
-	unsigned char* GetImageBuffer();
-
-	int GetImageWidth() const { return m_Width; }
-	int GetImageHeight() const { return m_Height; }
-
-private:
-
-	//ÑÕÉ«Î»Éî
-	int m_BitDepth;
-
-	int m_Width;
-	int m_Height;
-	int m_ColorType;
-
-	unsigned char* m_BGRA;
-	unsigned char* m_RGBA;
-
-	//libpng¹Ì¶¨Á½¸ö×îÖØÒªµÄ½á¹¹ÌåÖ¸Õë 
-	png_structp		m_png_ptr;
-	png_infop		m_info_ptr;
-
-};
+//#pragma once
+//
+//#include <iostream>
+//#include "png.h"
+//
+////ï¿½ï¿½×°libpngï¿½â£¬ï¿½ï¿½ï¿½Ú²ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½stb_imageï¿½ï¿½ï¿½ï¿½ï¿½ 
+//
+//class FPngLoader
+//{
+//public:
+//	FPngLoader();
+//
+//	bool LoadFile(std::string FileName);
+//
+//	//ï¿½Ç·ï¿½ï¿½ÇºÏ·ï¿½ï¿½ï¿½pngï¿½Ä¼ï¿½
+//	bool IsPNG(FILE *fp);
+//
+//	void ReadPNGToBuffer(FILE *fp);
+//
+//	unsigned char* GetImageBuffer();
+//
+//	int GetImageWidth() const { return m_Width; }
+//	int GetImageHeight() const { return m_Height; }
+//
+//private:
+//
+//	//ï¿½ï¿½É«Î»ï¿½ï¿½
+//	int m_BitDepth;
+//
+//	int m_Width;
+//	int m_Height;
+//	int m_ColorType;
+//
+//	unsigned char* m_BGRA;
+//	unsigned char* m_RGBA;
+//
+//	//libpngï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ä½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½ 
+//	png_structp		m_png_ptr;
+//	png_infop		m_info_ptr;
+//
+//};

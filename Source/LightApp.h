@@ -15,13 +15,20 @@ public:
 
 	virtual void KeyboardCB(struct GLFWwindow *window, int keyCode, int keyScanCode, int keyAction, int comboFlags);
 
-	virtual void MousePosCB(struct GLFWwindow *window, double x, double y);
+	virtual void MouseCB(struct GLFWwindow *window, double x, double y);
 
 	virtual void Init(int WindowWidth, int WindowHeight);
 
 	virtual void Run();
 
+	virtual void BindVAO();
+
+	virtual void PerpareMesh();
+
 private:
+
+	
+
 	void CreateVertexBuffer();
 
 	void CreateIndexBuffer();
@@ -29,6 +36,9 @@ private:
 private:
 	GLuint m_VBO;
 	GLuint m_IBO;
+	//VertexArrayObject
+	GLuint m_VAO;
+
 	class FLightingTechnique	*m_pEffect;
 	class FCXTexture*	m_pTexture;
 	class Camera*		m_pCamera;

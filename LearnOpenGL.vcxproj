@@ -89,6 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\RenderLearn\libpng\LearnOpenGL\ThirdParty\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -101,13 +102,13 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\stb;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\Effects;$(ProjectDir)ThirdParty\stb;$(ProjectDir)ThirdParty\zlib\include;$(ProjectDir)ThirdParty\libpng\include;$(ProjectDir)ThirdParty\GLFW\includes;$(ProjectDir)ThirdParty\GLAD\include;$(ProjectDir)Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libpng15.lib;zlib.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\lib\x64;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\lib\x64;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\ATB\lib;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)ThirdParty\zlib\lib\x64;$(ProjectDir)ThirdParty\libpng\lib\x64;$(ProjectDir)ThirdParty\ATB\lib;$(ProjectDir)ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,6 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\RenderLearn\libpng\LearnOpenGL\ThirdParty\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -131,20 +133,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\stb;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\zlib\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\libpng\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\includes;T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLAD\include;T:\OpenGLLearning\GLLearn\LearnOpenGL\Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\Effects;$(ProjectDir)ThirdParty\stb;$(ProjectDir)ThirdParty\zlib\include;$(ProjectDir)ThirdParty\libpng\include;$(ProjectDir)ThirdParty\GLFW\includes;$(ProjectDir)ThirdParty\GLAD\include;$(ProjectDir)Source\ogl\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libpng15.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalLibraryDirectories>T:\OpenGLLearning\GLLearn\LearnOpenGL\ThirdParty\GLFW\Lib\Release\X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\App\BasicAPP.cpp" />
     <ClCompile Include="Source\Common.cpp" />
     <ClCompile Include="Source\CxApp.cpp" />
     <ClCompile Include="Source\CxTexture.cpp" />
+    <ClCompile Include="Source\Effects\BasicShadingEffect.cpp" />
     <ClCompile Include="Source\IAppCallback.cpp" />
     <ClCompile Include="Source\LightApp.cpp" />
     <ClCompile Include="Source\LightingTechnique.cpp" />
@@ -160,10 +164,12 @@
     <ClCompile Include="ThirdParty\GLAD\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\App\BasicAPP.h" />
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\CommonTypes.h" />
     <ClInclude Include="Source\CxApp.h" />
     <ClInclude Include="Source\CxTexture.h" />
+    <ClInclude Include="Source\Effects\BasicShadingEffect.h" />
     <ClInclude Include="Source\IAppCallback.h" />
     <ClInclude Include="Source\LightApp.h" />
     <ClInclude Include="Source\LightingTechnique.h" />
@@ -182,6 +188,8 @@
   <ItemGroup>
     <None Include="Source\shaders\BaseFS.glsl" />
     <None Include="Source\shaders\BaseVS.glsl" />
+    <None Include="Source\shaders\DebugBaseFS.glsl" />
+    <None Include="Source\shaders\DebugBaseVS.glsl" />
     <None Include="Source\shaders\LightingFS.glsl" />
     <None Include="Source\shaders\LightingVS.glsl" />
   </ItemGroup>
