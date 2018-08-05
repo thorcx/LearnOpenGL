@@ -87,9 +87,6 @@
     <ClCompile Include="Source\LightApp.cpp">
       <Filter>Source Files\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LightingTechnique.cpp">
-      <Filter>Source Files\Private</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IAppCallback.cpp">
       <Filter>Source Files\Private</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Source\App\BasicAPP.cpp">
       <Filter>Source Files\Private\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Effects\LightingTechnique.cpp">
+      <Filter>Source Files\Private\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +149,6 @@
     <ClInclude Include="Source\LightApp.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LightingTechnique.h">
-      <Filter>Source Files\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Source\IAppCallback.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="Source\App\BasicAPP.h">
       <Filter>Source Files\Public\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Effects\LightingTechnique.h">
+      <Filter>Source Files\Public\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

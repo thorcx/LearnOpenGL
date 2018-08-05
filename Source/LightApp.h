@@ -29,9 +29,12 @@ private:
 
 	
 
-	void CreateVertexBuffer();
+	void CreateVertexBuffer(const unsigned int* pIndices, unsigned int IndexCount);
 
-	void CreateIndexBuffer();
+	void CreateIndexBuffer(const unsigned int* pIndices, unsigned int SizeInBytes);
+
+	void CalcNormals(const unsigned int* pIndices, unsigned int IndexCount,
+		struct Vertex* pVertices, unsigned int VertexCount);
 
 private:
 	GLuint m_VBO;
