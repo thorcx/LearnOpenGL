@@ -134,10 +134,10 @@ void FLightAPP::Run()
 		m_pEffect->SetWVP(p.GetWVPTrans());
 		const Matrix4f& WorldTrans = p.GetWorldTrans();
 		m_pEffect->SetWorldMatrix(WorldTrans);
-
-
 		m_pEffect->SetDirectionalLight(m_DirLight);
-
+		m_pEffect->SetEyeWorldPos(m_pCamera->GetPos());
+		m_pEffect->SetMatSpecularIntensity(1.0f);
+		m_pEffect->SetMatSpecularPower(32);
 		m_pEffect->Enable();
 
 		BindVAO();
