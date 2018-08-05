@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "../ogl/ogldev_math_3d.h"
 #include "../ogl/ogldev_lights_common.h"
-#include "../CxApp.h"
+#include "CxApp.h"
 #include "../IAppCallback.h"
 class FBasicAPP :public CxApp, public ICallbacks
 {

@@ -24,7 +24,7 @@ public:
 protected:
 	CxApp();
 
-	~CxApp();
+	virtual ~CxApp();
 
 	
 

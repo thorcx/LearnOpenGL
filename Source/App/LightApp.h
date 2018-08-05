@@ -1,15 +1,17 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "ogl/ogldev_math_3d.h"
-#include "ogl/ogldev_lights_common.h"
+#include "../ogl/ogldev_math_3d.h"
+#include "../ogl/ogldev_lights_common.h"
 #include "CxApp.h"
-#include "IAppCallback.h"
+#include "../IAppCallback.h"
+
+//创建一个金字塔形,并用LightTechnique着色
 class FLightAPP :public CxApp, public ICallbacks 
 {
 public:
 
 	FLightAPP();
-	~FLightAPP();
+	virtual ~FLightAPP();
 
 	virtual void FrameBufferSizeCB(struct GLFWwindow *window, int width, int height);
 
@@ -25,18 +27,18 @@ public:
 
 	virtual void PerpareMesh();
 
-private:
+protected:
 
 	
 
-	void CreateVertexBuffer(const unsigned int* pIndices, unsigned int IndexCount);
+	virtual void CreateVertexBuffer(const unsigned int* pIndices, unsigned int IndexCount);
 
-	void CreateIndexBuffer(const unsigned int* pIndices, unsigned int SizeInBytes);
+	virtual void CreateIndexBuffer(const unsigned int* pIndices, unsigned int SizeInBytes);
 
-	void CalcNormals(const unsigned int* pIndices, unsigned int IndexCount,
+	virtual void CalcNormals(const unsigned int* pIndices, unsigned int IndexCount,
 		struct Vertex* pVertices, unsigned int VertexCount);
 
-private:
+protected:
 	GLuint m_VBO;
 	GLuint m_IBO;
 	//VertexArrayObject

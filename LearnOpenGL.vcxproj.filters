@@ -81,12 +81,6 @@
     <ClCompile Include="Source\CxTexture.cpp">
       <Filter>Source Files\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CxApp.cpp">
-      <Filter>Source Files\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LightApp.cpp">
-      <Filter>Source Files\Private</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IAppCallback.cpp">
       <Filter>Source Files\Private</Filter>
     </ClCompile>
@@ -98,6 +92,15 @@
     </ClCompile>
     <ClCompile Include="Source\Effects\LightingTechnique.cpp">
       <Filter>Source Files\Private\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App\PointLightApp.cpp">
+      <Filter>Source Files\Private\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App\LightApp.cpp">
+      <Filter>Source Files\Private\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App\CxApp.cpp">
+      <Filter>Source Files\Private\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,12 +146,6 @@
     <ClInclude Include="Source\CxTexture.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CxApp.h">
-      <Filter>Source Files\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LightApp.h">
-      <Filter>Source Files\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Source\IAppCallback.h">
       <Filter>Source Files\Public</Filter>
     </ClInclude>
@@ -160,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="Source\Effects\LightingTechnique.h">
       <Filter>Source Files\Public\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App\PointLightApp.h">
+      <Filter>Source Files\Public\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App\LightApp.h">
+      <Filter>Source Files\Public\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App\CxApp.h">
+      <Filter>Source Files\Public\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

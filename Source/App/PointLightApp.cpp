@@ -1,11 +1,9 @@
-
 #include <glad/glad.h>
-#include "ogl/ogldev_pipeline.h"
-#include "ogl/ogldev_camera.h"
+#include "../ogl/ogldev_pipeline.h"
+#include "../ogl/ogldev_camera.h"
 #include "LightingTechnique.h"
-#include "LightApp.h"
-#include "CxTexture.h"
-
+#include "PointLightApp.h"
+#include "../CxTexture.h"
 
 struct Vertex
 {
@@ -20,12 +18,20 @@ struct Vertex
 		m_pos = pos;
 		m_tex = tex;
 		m_normal = Vector3f(0.0f, 0.0f, 0.0f);
+	};
+	Vertex(const Vector3f& pos, const Vector2f& tex, const Vector3f& normal)
+	{
+		m_pos = pos;
+		m_tex = tex;
+		m_normal = normal;
 	}
 };
 
-FLightAPP::FLightAPP()
-:m_pCamera(nullptr),m_pEffect(nullptr),m_pTexture(nullptr),
-m_Scale(0.0f)
+static const float FieldDepth = 20.0f;
+static const float FieldWidth = 10.0f;
+
+FPointLightApp::FPointLightApp()
+	:FLightAPP()
 {
 	m_DirLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
 	m_DirLight.AmbientIntensity = 0.5f;
@@ -33,19 +39,17 @@ m_Scale(0.0f)
 	m_DirLight.Direction = Vector3f(1.0f, 0.0f, 0.0f);
 }
 
-FLightAPP::~FLightAPP()
+FPointLightApp::~FPointLightApp()
 {
-	delete m_pEffect;
-	delete m_pCamera;
-	delete m_pTexture;
+
 }
 
-void FLightAPP::FrameBufferSizeCB(struct GLFWwindow *window, int width, int height)
+void FPointLightApp::FrameBufferSizeCB(struct GLFWwindow *window, int width, int height)
 {
-	int a = 1;
+
 }
 
-void FLightAPP::KeyboardCB(struct GLFWwindow *window, int keyCode, int keyScanCode, int keyAction, int comboFlags)
+void FPointLightApp::KeyboardCB(struct GLFWwindow *window, int keyCode, int keyScanCode, int keyAction, int comboFlags)
 {
 	switch (keyCode)
 	{
@@ -68,48 +72,51 @@ void FLightAPP::KeyboardCB(struct GLFWwindow *window, int keyCode, int keyScanCo
 	m_pCamera->OnKeyboardEvent(keyCode);
 }
 
-void FLightAPP::MouseCB(struct GLFWwindow *window, double x, double y)
+void FPointLightApp::MouseCB(struct GLFWwindow *window, double x, double y)
 {
 	m_pCamera->OnMouse(x, y);
 }
 
-void FLightAPP::Init(int WindowWidth, int WindowHeight)
+void FPointLightApp::Init(int WindowWidth, int WindowHeight)
 {
 	CxApp::Init(WindowWidth, WindowHeight);
+	Vector3f Pos(5.0f, 1.0f, -3.0f);
+	Vector3f Target(0.0f, 0.0f, 1.0f);
+	Vector3f Up(0.0, 1.0f, 0.0f);
 
+	m_pCamera = new Camera(WindowWidth, WindowHeight, Pos, Target, Up);
 
-
-	m_PersProjInfo.FOV = 60.0f;
+	m_PersProjInfo.FOV = 45.0f;
 	m_PersProjInfo.Width = WindowWidth;
 	m_PersProjInfo.Height = WindowHeight;
 	m_PersProjInfo.zNear = 1.0f;
-	m_PersProjInfo.zFar = 100.0f;
+	m_PersProjInfo.zFar = 50.0f;
 
-	Vector3f Pos(0.0f, 0.0f, -3.0f);
-	Vector3f Target(0.0f, 0.0f, 1.0f);
-	Vector3f Up(0.0, 1.0f, 0.0f);
-	m_pCamera = new Camera(WindowWidth, WindowHeight, Pos, Target, Up);
 
 	PerpareMesh();
-//	CreateVertexBuffer();
-//	CreateIndexBuffer();
 
 	m_pEffect = new FLightingTechnique();
+
 	if (!m_pEffect->Init())
 	{
-		return;
-	}
-	m_pEffect->Enable();
-	m_pEffect->SetTextureUnit(0);
-	m_pTexture = new FCXTexture(GL_TEXTURE_2D, "test.png");
-	if (!m_pTexture->Load())
-	{
-		return;
+		printf("Error initializing the lighting technique\n");
+		return ;
 	}
 
+	m_pEffect->Enable();
+
+	m_pEffect->SetTextureUnit(0);
+
+	m_pTexture = new FCXTexture(GL_TEXTURE_2D, "test.png");
+
+	if (!m_pTexture->Load()) {
+		return ;
+	}
+
+	return ;
 }
 
-void FLightAPP::Run()
+void FPointLightApp::Run()
 {
 	while (!glfwWindowShouldClose(m_pGLFWwindow))
 	{
@@ -118,17 +125,27 @@ void FLightAPP::Run()
 			glfwSetWindowShouldClose(m_pGLFWwindow, true);
 		}
 		m_pCamera->OnRender();
-		
+
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glFrontFace(GL_CW);
 		glCullFace(GL_BACK);
 		glEnable(GL_CULL_FACE);
-		m_Scale += 1;
-		
+		m_Scale += 0.0057f;
+
+		PointLight pl[2];
+		pl[0].DiffuseIntensity = 0.5f;
+		pl[0].Color = Vector3f(1.0f, 0.5f, 0.0f);
+		pl[0].Position = Vector3f(3.0f, 1.0f, FieldDepth * (cosf(m_Scale) + 1.0f) / 2.0f);
+		pl[0].Attenuation.Linear = 0.1f;
+		pl[1].DiffuseIntensity = 0.5f;
+		pl[1].Color = Vector3f(0.0f, 0.5f, 1.0f);
+		pl[1].Position = Vector3f(7.0f, 1.0f, FieldDepth * (sinf(m_Scale) + 1.0f) / 2.0f);
+		pl[1].Attenuation.Linear = 0.1f;
+		m_pEffect->SetPointLights(2, pl);
+
 		Pipeline p;
-		p.Rotate(0.0f, m_Scale, 0.0f);
-		p.WorldPos(0.0f, 0.0f, 10.0f);
+		p.WorldPos(0.0f, 0.0f, 1.0f);
 		p.SetCamera(m_pCamera->GetPos(), m_pCamera->GetTarget(), m_pCamera->GetUp());
 		p.SetPerspectiveProj(m_PersProjInfo);
 		m_pEffect->SetWVP(p.GetWVPTrans());
@@ -142,47 +159,45 @@ void FLightAPP::Run()
 
 		BindVAO();
 		m_pTexture->Bind(GL_TEXTURE0);
-		
-		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(m_pGLFWwindow);
 		glfwPollEvents();
 
 	}
 }
 
-void FLightAPP::BindVAO()
-{
-	glBindVertexArray(m_VAO);
-}
-
-void FLightAPP::PerpareMesh()
+void FPointLightApp::PerpareMesh()
 {
 	glGenVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
-	unsigned int Indices[] = { 0, 3, 1,
-		1, 3, 2,
-		2, 3, 0,
-		1, 2, 0 };
-	CreateVertexBuffer(Indices, ARRAY_SIZE_IN_ELEMENTS(Indices));
+	CreateVertexBuffer(nullptr, 0);
+	unsigned int Indices[] = { 0, 1, 2,
+		3, 4, 5
+		 };
 	CreateIndexBuffer(Indices, sizeof(Indices));
 	glBindVertexArray(0);
 }
 
-
-
-void FLightAPP::CreateVertexBuffer(const unsigned int* pIndices, unsigned int IndexCount)
+void FPointLightApp::CreateVertexBuffer(const unsigned int* pIndices, unsigned int IndexCount)
 {
-	Vertex Vertices[4] = { Vertex(Vector3f(-1.0f, -1.0f, 0.5773f), Vector2f(0.0f, 0.0f)),
-		Vertex(Vector3f(0.0f, -1.0f, -1.15475f), Vector2f(0.5f, 0.0f)),
-		Vertex(Vector3f(1.0f, -1.0f, 0.5773f),  Vector2f(1.0f, 0.0f)),
-		Vertex(Vector3f(0.0f, 1.0f, 0.0f),      Vector2f(0.5f, 1.0f)) };
+	const Vector3f Normal = Vector3f(0.0, 1.0f, 0.0f);
 
-	CalcNormals(pIndices, IndexCount, Vertices, 4);
+	Vertex Vertices[6] = {
+		Vertex(Vector3f(0.0f, 0.0f, 0.0f),             Vector2f(0.0f, 0.0f), Normal),
+		Vertex(Vector3f(0.0f, 0.0f, FieldDepth),       Vector2f(0.0f, 1.0f), Normal),
+		Vertex(Vector3f(FieldWidth, 0.0f, 0.0f),       Vector2f(1.0f, 0.0f), Normal),
+
+		Vertex(Vector3f(FieldWidth, 0.0f, 0.0f),       Vector2f(1.0f, 0.0f), Normal),
+		Vertex(Vector3f(0.0f, 0.0f, FieldDepth),       Vector2f(0.0f, 1.0f), Normal),
+		Vertex(Vector3f(FieldWidth, 0.0f, FieldDepth), Vector2f(1.0f, 1.0f), Normal)
+	};
 
 	glGenBuffers(1, &m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
@@ -194,34 +209,9 @@ void FLightAPP::CreateVertexBuffer(const unsigned int* pIndices, unsigned int In
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)(5 * sizeof(float)));
 }
 
-void FLightAPP::CreateIndexBuffer(const unsigned int* pIndices, unsigned int SizeInBytes)
+void FPointLightApp::CreateIndexBuffer(const unsigned int* pIndices, unsigned int SizeInBytes)
 {
-	
 	glGenBuffers(1, &m_IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, SizeInBytes, pIndices, GL_STATIC_DRAW);
 }
-
-void FLightAPP::CalcNormals(const unsigned int* pIndices, unsigned int IndexCount, Vertex* pVertices, unsigned int VertexCount)
-{
-	// Accumulate each triangle normal into each of the triangle vertices
-	for (unsigned int i = 0; i < IndexCount; i += 3) {
-		unsigned int Index0 = pIndices[i];
-		unsigned int Index1 = pIndices[i + 1];
-		unsigned int Index2 = pIndices[i + 2];
-		Vector3f v1 = pVertices[Index1].m_pos - pVertices[Index0].m_pos;
-		Vector3f v2 = pVertices[Index2].m_pos - pVertices[Index0].m_pos;
-		Vector3f Normal = v1.Cross(v2);
-		Normal.Normalize();
-
-		pVertices[Index0].m_normal += Normal;
-		pVertices[Index1].m_normal += Normal;
-		pVertices[Index2].m_normal += Normal;
-	}
-
-	// Normalize all the vertex normals
-	for (unsigned int i = 0; i < VertexCount; i++) {
-		pVertices[i].m_normal.Normalize();
-	}
-}
-

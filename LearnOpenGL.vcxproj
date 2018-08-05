@@ -145,13 +145,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\App\BasicAPP.cpp" />
+    <ClCompile Include="Source\App\CxApp.cpp" />
+    <ClCompile Include="Source\App\LightApp.cpp" />
+    <ClCompile Include="Source\App\PointLightApp.cpp" />
     <ClCompile Include="Source\Common.cpp" />
-    <ClCompile Include="Source\CxApp.cpp" />
     <ClCompile Include="Source\CxTexture.cpp" />
     <ClCompile Include="Source\Effects\BasicShadingEffect.cpp" />
     <ClCompile Include="Source\Effects\LightingTechnique.cpp" />
     <ClCompile Include="Source\IAppCallback.cpp" />
-    <ClCompile Include="Source\LightApp.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\ogl\camera.cpp" />
     <ClCompile Include="Source\ogl\math_3d.cpp" />
@@ -165,14 +166,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\BasicAPP.h" />
+    <ClInclude Include="Source\App\CxApp.h" />
+    <ClInclude Include="Source\App\LightApp.h" />
+    <ClInclude Include="Source\App\PointLightApp.h" />
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\CommonTypes.h" />
-    <ClInclude Include="Source\CxApp.h" />
     <ClInclude Include="Source\CxTexture.h" />
     <ClInclude Include="Source\Effects\BasicShadingEffect.h" />
     <ClInclude Include="Source\Effects\LightingTechnique.h" />
     <ClInclude Include="Source\IAppCallback.h" />
-    <ClInclude Include="Source\LightApp.h" />
     <ClInclude Include="Source\ogl\ogldev_atb.h" />
     <ClInclude Include="Source\ogl\ogldev_basic_lighting.h" />
     <ClInclude Include="Source\ogl\ogldev_camera.h" />

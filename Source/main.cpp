@@ -7,8 +7,8 @@
 #include "ogl/ogldev_math_3d.h"
 #include "ogl/ogldev_pipeline.h"
 #include "CxTexture.h"
-#include "LightApp.h"
-#include "APP/BasicAPP.h"
+#include "App/LightApp.h"
+#include "APP/PointLightApp.h"
 
 static ICallbacks* s_pCallbacks = nullptr;
 
@@ -44,7 +44,9 @@ int main()
 	//FBasicAPP app;
 	//app.Init(800, 600);
 	//app.Run();
-	FLightAPP app;
+	//FLightAPP app;
+	
+	FPointLightApp app;
 	app.Init(800, 600);
 	s_pCallbacks = &app;
 

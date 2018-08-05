@@ -10,6 +10,8 @@
 class FLightingTechnique :public Technique
 {
 public:
+
+	static const unsigned int MAX_POINT_LIGHTS = 2;
 	FLightingTechnique();
 
 	virtual bool Init();
@@ -22,6 +24,8 @@ public:
 	void SetEyeWorldPos(const Vector3f& EyeWorldPos);
 	void SetMatSpecularIntensity(float Intensity);
 	void SetMatSpecularPower(float Power);
+
+	void SetPointLights(unsigned int NumLights, const PointLight* pLights);
 private:
 	GLuint	m_WVPLocation;
 	GLuint  m_WorldMatrixLocation;
@@ -31,10 +35,24 @@ private:
 	GLuint m_matSpecularIntensityLocation;
 	GLuint m_matSpecularPowerLocation;
 
+	GLuint m_numPointLightsLocation;
 	struct {
 		GLuint Color;
 		GLuint AmbientIntensity;
 		GLuint Direction;
 		GLuint DiffuseIntensity;
 	}m_DirLightLocation;
+
+	struct {
+		GLuint Color;
+		GLuint AmbientIntensity;
+		GLuint DiffuseIntensity;
+		GLuint Position;
+		struct
+		{
+			GLuint Constant;
+			GLuint Linear;
+			GLuint Exp;
+		} Atten;
+	} m_pointLightsLocation[MAX_POINT_LIGHTS];
 };

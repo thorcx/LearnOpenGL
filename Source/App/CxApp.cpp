@@ -1,7 +1,7 @@
 #include "CxApp.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "ogl\ogldev_util.h"
+#include "../ogl\ogldev_util.h"
 #include <iostream>
 
 void CxApp::Init(int WindowWidth, int WindowHeight)
